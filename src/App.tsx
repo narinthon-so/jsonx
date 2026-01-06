@@ -5,7 +5,7 @@ import { OutputViewer } from './components/OutputViewer';
 import { formatJson, minifyJson, loadSample } from './utils/json';
 import { usePWAInstall } from './hooks/usePWAInstall';
 import { VerificationOverlay } from './components/VerificationOverlay';
-import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload } from 'lucide-react';
+import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload, Coffee } from 'lucide-react';
 
 function App() {
   const [input, setInput] = useState('');
@@ -109,6 +109,23 @@ function App() {
       <div className="glass-header flex-between">
         <Header />
         <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <a
+            href={import.meta.env.VITE_BUY_ME_A_COFFEE_URL || "https://www.buymeacoffee.com"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="secondary-btn"
+            style={{ 
+              fontSize: '0.875rem', 
+              padding: '6px 12px',
+              border: '1px solid var(--border-color)',
+              background: 'rgba(255, 221, 0, 0.1)', // Subtle yellow tint
+              color: 'var(--text-color)',
+              textDecoration: 'none'
+            }}
+            title="Support the developer"
+          >
+            <Coffee size={16} color="#FFDD00" /> <span className="hidden-mobile">Buy me a coffee</span>
+          </a>
           {canInstall && (
             <button 
               onClick={install} 
