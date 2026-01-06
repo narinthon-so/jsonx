@@ -162,9 +162,7 @@ function App() {
 
       </main>
       
-      <footer className="p-md text-sm opacity-50" style={{ textAlign: 'center' }}>
-        <p>Progressive Web App • Built with React & Vite</p>
-      </footer>
+
     </div>
   );
 }
