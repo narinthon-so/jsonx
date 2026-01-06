@@ -4,6 +4,7 @@ import { Editor } from './components/Editor';
 import { OutputViewer } from './components/OutputViewer';
 import { formatJson, minifyJson, loadSample } from './utils/json';
 import { usePWAInstall } from './hooks/usePWAInstall';
+import { TurnstileWidget } from './components/TurnstileWidget';
 import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload } from 'lucide-react';
 
 function App() {
@@ -162,6 +163,9 @@ function App() {
 
       </main>
       
+      <div className="p-md" style={{ display: 'flex', justifyContent: 'center', opacity: 0.8, marginBottom: '1rem' }}>
+        <TurnstileWidget theme={theme as 'light' | 'dark' | 'auto'} />
+      </div>
 
     </div>
   );
