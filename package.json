@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@microlink/react-json-view": "^1.27.0",
+    "@types/file-saver": "^2.0.7",
     "clsx": "^2.1.1",
+    "file-saver": "^2.0.5",
     "lucide-react": "^0.562.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"

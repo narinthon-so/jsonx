@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import ReactJson from '@microlink/react-json-view';
 import { clsx } from 'clsx';
+import { saveAs } from 'file-saver';
 import { Check, Copy, Code, Network, Download } from 'lucide-react';
 
 interface OutputViewerProps {
@@ -30,16 +31,9 @@ export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
 
   const handleDownload = () => {
     if (!value) return;
-    const blob = new Blob([value], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `jsonx-data-${new Date().toISOString().slice(0, 10)}.json`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    // Delay revoking to ensure download starts
-    setTimeout(() => URL.revokeObjectURL(url), 100);
+    const blob = new Blob([value], { type: 'application/json;charset=utf-8' });
+    const filename = `jsonx-data-${new Date().toISOString().slice(0, 10)}.json`;
+    saveAs(blob, filename);
   };
 
   return (
