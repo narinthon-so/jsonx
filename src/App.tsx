@@ -4,7 +4,7 @@ import { Editor } from './components/Editor';
 import { OutputViewer } from './components/OutputViewer';
 import { formatJson, minifyJson, loadSample } from './utils/json';
 import { usePWAInstall } from './hooks/usePWAInstall';
-import { TurnstileWidget } from './components/TurnstileWidget';
+import { VerificationOverlay } from './components/VerificationOverlay';
 import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload } from 'lucide-react';
 
 function App() {
@@ -91,6 +91,19 @@ function App() {
     if (error) setError(null);
   };
 
+  const [isVerified, setIsVerified] = useState(false);
+
+  const handleVerification = () => {
+    // Add small delay for smooth transition
+    setTimeout(() => {
+      setIsVerified(true);
+    }, 500);
+  };
+
+  if (!isVerified) {
+    return <VerificationOverlay onVerify={handleVerification} theme={theme as 'light' | 'dark' | 'auto'} />;
+  }
+
   return (
     <div className="app-container">
       <div className="glass-header flex-between">
@@ -163,9 +176,6 @@ function App() {
 
       </main>
       
-      <div className="p-md" style={{ display: 'flex', justifyContent: 'center', opacity: 0.8, marginBottom: '1rem' }}>
-        <TurnstileWidget theme={theme as 'light' | 'dark' | 'auto'} />
-      </div>
 
     </div>
   );

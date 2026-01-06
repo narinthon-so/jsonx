@@ -10,8 +10,9 @@ interface TurnstileWidgetProps {
 export function TurnstileWidget({ onSuccess, onError, theme = 'auto' }: TurnstileWidgetProps) {
   const [status, setStatus] = useState<'pending' | 'success' | 'error'>('pending');
 
-  // Use Environment Variable or Fallback to Cloudflare Test Key (Always Pass)
-  const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA';
+  // Automatically use Test Key on localhost to avoid Error 400020
+  const isLocalhost = typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+  const SITE_KEY = isLocalhost ? '1x00000000000000000000AA' : (import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA');
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
