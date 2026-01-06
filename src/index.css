@@ -1,4 +1,4 @@
-@import './design-system.css';
+@import "./design-system.css";
 
 /* Utilities */
 .flex-center {
@@ -17,26 +17,58 @@
   flex-direction: column;
 }
 
-.gap-sm { gap: 0.5rem; }
-.gap-md { gap: 1rem; }
+.gap-sm {
+  gap: 0.5rem;
+}
+.gap-md {
+  gap: 1rem;
+}
 
-.text-sm { font-size: 0.875rem; }
-.text-xs { font-size: 0.75rem; }
-.font-medium { font-weight: 500; }
-.font-semibold { font-weight: 600; }
-.opacity-70 { opacity: 0.7; }
-.opacity-50 { opacity: 0.5; }
+.text-sm {
+  font-size: 0.875rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.opacity-70 {
+  opacity: 0.7;
+}
+.opacity-50 {
+  opacity: 0.5;
+}
 
-.p-sm { padding: 0.5rem; }
-.p-md { padding: 1rem; }
-.p-base { padding: 0.75rem 1rem; }
+.p-sm {
+  padding: 0.5rem;
+}
+.p-md {
+  padding: 1rem;
+}
+.p-base {
+  padding: 0.75rem 1rem;
+}
 
-.rounded-lg { border-radius: 12px; }
-.rounded-md { border-radius: 8px; }
+.rounded-lg {
+  border-radius: 12px;
+}
+.rounded-md {
+  border-radius: 8px;
+}
 
-.w-full { width: 100%; }
-.h-full { height: 100%; }
-.min-h-screen { min-height: 100vh; }
+.w-full {
+  width: 100%;
+}
+.h-full {
+  height: 100%;
+}
+.min-h-screen {
+  min-height: 100vh;
+}
 
 .glass-header {
   margin: 1rem;
@@ -160,11 +192,20 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
+  /* Improvements for light mode contrast */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .secondary-btn:hover {
-  background: rgba(150, 150, 150, 0.1);
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
+}
+
+/* Dark mode overrides if needed */
+:root[data-theme="dark"] .secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 textarea {
@@ -194,6 +235,42 @@ textarea {
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(156, 163, 175, 0.8);
+
+/* Buy Me a Coffee Button */
+.btn-coffee {
+  font-size: 0.875rem;
+  padding: 6px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s;
+  border: 1px solid transparent; /* default border */
+}
+
+/* Light Mode: Solid Brand Color for Max Readability */
+:root[data-theme="light"] .btn-coffee {
+  background-color: #FFDD00;
+  color: #000000;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+:root[data-theme="light"] .btn-coffee:hover {
+  background-color: #FFEA00;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+}
+
+/* Dark Mode: Subtle Glassy Feel */
+:root[data-theme="dark"] .btn-coffee {
+  background-color: rgba(255, 221, 0, 0.1);
+  color: #FFDD00;
+  border: 1px solid rgba(255, 221, 0, 0.3);
+}
+
+:root[data-theme="dark"] .btn-coffee:hover {
+  background-color: rgba(255, 221, 0, 0.2);
+  border-color: #FFDD00;
 }
