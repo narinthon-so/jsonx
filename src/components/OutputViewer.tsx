@@ -42,8 +42,8 @@ export function OutputViewer({ value, placeholder }: OutputViewerProps) {
               style={{ 
                 padding: '4px 8px', 
                 fontSize: '0.75rem', 
-                background: viewMode === 'text' ? 'white' : 'transparent',
-                boxShadow: viewMode === 'text' ? '0 1px 2px rgba(0,0,0,0.1)' : 'none',
+                background: viewMode === 'text' ? 'var(--btn-active-bg)' : 'transparent',
+                boxShadow: viewMode === 'text' ? 'var(--btn-active-shadow)' : 'none',
                 height: 'auto',
                 width: 'auto',
                 gap: '4px'
@@ -59,8 +59,8 @@ export function OutputViewer({ value, placeholder }: OutputViewerProps) {
               style={{ 
                 padding: '4px 8px', 
                 fontSize: '0.75rem', 
-                background: viewMode === 'tree' ? 'white' : 'transparent',
-                boxShadow: viewMode === 'tree' ? '0 1px 2px rgba(0,0,0,0.1)' : 'none',
+                background: viewMode === 'tree' ? 'var(--btn-active-bg)' : 'transparent',
+                boxShadow: viewMode === 'tree' ? 'var(--btn-active-shadow)' : 'none',
                 height: 'auto',
                 width: 'auto',
                 gap: '4px',

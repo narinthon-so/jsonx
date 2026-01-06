@@ -14,6 +14,10 @@ export default defineConfig({
         short_name: 'JSON Val',
         description: 'Modern JSON Validator & Formatter',
         theme_color: '#ffffff',
+        background_color: '#f0f2f5',
+        start_url: '/',
+        display: 'standalone',
+        orientation: 'portrait',
         icons: [
           {
             src: 'pwa-192x192.png',
