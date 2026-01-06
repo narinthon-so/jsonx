@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ReactJson from '@microlink/react-json-view';
-import { Network, Code, Check } from 'lucide-react';
-import clsx from 'clsx';
+import { clsx } from 'clsx';
+import { Check, Copy, Code, Network, Download } from 'lucide-react';
 
 interface OutputViewerProps {
   value: string;
@@ -26,6 +26,19 @@ export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
     await navigator.clipboard.writeText(value);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleDownload = () => {
+    if (!value) return;
+    const blob = new Blob([value], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'formatted.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -75,9 +88,14 @@ export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
           </div>
         </div>
 
-        <button onClick={handleCopy} className="icon-btn" title="Copy Output" style={{ opacity: value ? 1 : 0.5 }}>
-           {copied ? <Check size={16} color="var(--success-color)" /> : <ClipboardIcon />}
-        </button>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button onClick={handleDownload} className="icon-btn" title="Download JSON" style={{ opacity: value ? 1 : 0.5 }}>
+            <Download size={16} />
+          </button>
+          <button onClick={handleCopy} className="icon-btn" title="Copy Output" style={{ opacity: value ? 1 : 0.5 }}>
+             {copied ? <Check size={16} color="var(--success-color)" /> : <Copy size={16} />}
+          </button>
+        </div>
       </div>
 
       {/* Content */}
@@ -118,8 +136,4 @@ export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
   );
 }
 
-function ClipboardIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/></svg>
-  )
-}
+

@@ -4,7 +4,7 @@ import { Editor } from './components/Editor';
 import { OutputViewer } from './components/OutputViewer';
 import { formatJson, minifyJson, loadSample } from './utils/json';
 import { usePWAInstall } from './hooks/usePWAInstall';
-import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download } from 'lucide-react';
+import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload } from 'lucide-react';
 
 function App() {
   const [input, setInput] = useState('');
@@ -64,6 +64,27 @@ function App() {
 
   // Auto-validate on input change? Maybe too aggressive for large JSON. 
   // Let's just clear error on change.
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const content = e.target?.result as string;
+      setInput(content);
+      setError(null);
+      // Reset input so same file can be selected again
+      event.target.value = '';
+    };
+    reader.readAsText(file);
+  };
+
+  const triggerFileUpload = () => {
+    document.getElementById('file-upload')?.click();
+  };
+
+  // Auto-validate on input change? Maybe too aggressive for large JSON. 
+  // Let's just clear error on change.
   const handleInputChange = (val: string) => {
     setInput(val);
     if (error) setError(null);
@@ -98,6 +119,13 @@ function App() {
         
         {/* Actions Toolbar */}
         <div className="glass glass-panel">
+          <input 
+            type="file" 
+            id="file-upload" 
+            accept=".json,.txt" 
+            style={{ display: 'none' }} 
+            onChange={handleFileUpload} 
+          />
           <button onClick={handleFormat} className="primary-btn">
             <Play size={18} /> Format
           </button>
@@ -105,6 +133,9 @@ function App() {
             <Minimize2 size={18} /> One Line
           </button>
           <div style={{ flex: 1 }}></div>
+          <button onClick={triggerFileUpload} className="icon-btn" title="Upload JSON File">
+            <Upload size={20} />
+          </button>
           <button onClick={handleLoadSample} className="icon-btn" title="Load Sample">
             <FileJson size={20} />
           </button>
