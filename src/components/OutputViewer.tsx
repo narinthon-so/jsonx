@@ -6,9 +6,10 @@ import clsx from 'clsx';
 interface OutputViewerProps {
   value: string;
   placeholder?: string;
+  theme: string;
 }
 
-export function OutputViewer({ value, placeholder }: OutputViewerProps) {
+export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
   const [viewMode, setViewMode] = useState<'text' | 'tree'>('text');
   const [copied, setCopied] = useState(false);
 
@@ -103,7 +104,7 @@ export function OutputViewer({ value, placeholder }: OutputViewerProps) {
           <div style={{ padding: '1rem', height: '100%' }}>
             <ReactJson 
               src={jsonObject} 
-              theme="rjv-default" 
+              theme={theme === 'dark' ? 'ocean' : 'rjv-default'} 
               style={{ background: 'transparent', fontFamily: 'monospace' }}
               name={null}
               displayDataTypes={false}

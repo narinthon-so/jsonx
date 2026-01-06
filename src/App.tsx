@@ -89,7 +89,7 @@ function App() {
           <button onClick={handleFormat} className="primary-btn">
             <Play size={18} /> Format
           </button>
-          <button onClick={handleMinify} className="primary-btn" style={{ background: 'var(--text-color)', opacity: 0.8 }}>
+          <button onClick={handleMinify} className="secondary-btn">
             <Minimize2 size={18} /> Minify
           </button>
           <div style={{ flex: 1 }}></div>
@@ -113,6 +113,7 @@ function App() {
           <OutputViewer 
             value={output} 
             placeholder="Result will appear here..."
+            theme={theme}
           />
         </div>
 
