@@ -10,8 +10,8 @@ interface TurnstileWidgetProps {
 export function TurnstileWidget({ onSuccess, onError, theme = 'auto' }: TurnstileWidgetProps) {
   const [status, setStatus] = useState<'pending' | 'success' | 'error'>('pending');
 
-  // Cloudflare Dummy Site Key (Always Pass)
-  const SITE_KEY = '1x00000000000000000000AA';
+  // Use Environment Variable or Fallback to Cloudflare Test Key (Always Pass)
+  const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || '1x00000000000000000000AA';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
