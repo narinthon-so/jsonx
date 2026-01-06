@@ -87,11 +87,11 @@ export function OutputViewer({ value, placeholder }: OutputViewerProps) {
             readOnly
             placeholder={placeholder}
             spellCheck={false}
+            className="p-md text-sm"
             style={{ 
               height: '100%', 
               width: '100%', 
-              padding: '1rem', 
-              fontFamily: 'monospace',
+              fontFamily: 'var(--font-mono)',
               border: 'none',
               background: 'transparent',
               resize: 'none',

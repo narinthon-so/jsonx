@@ -51,12 +51,12 @@ export function Editor({ value, onChange, readOnly, label, error, placeholder }:
           readOnly={readOnly}
           placeholder={placeholder}
           spellCheck={false}
+          className="p-md text-sm"
           style={{ 
             height: '100%', 
             width: '100%', 
-            padding: '1rem', 
-            fontFamily: 'monospace',
-            backgroundColor: error ? 'rgba(239, 68, 68, 0.05)' : 'transparent'
+            fontFamily: 'var(--font-mono)',
+            backgroundColor: error ? 'var(--error-bg)' : 'transparent'
           }}
         />
       </div>

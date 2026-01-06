@@ -54,13 +54,13 @@ function App() {
   };
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div className="app-container">
       <Header />
       
-      <main style={{ flex: 1, padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <main className="main-content">
         
         {/* Actions Toolbar */}
-        <div className="glass" style={{ padding: '0.75rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+        <div className="glass glass-panel">
           <button onClick={handleFormat} className="primary-btn">
             <Play size={18} /> Format
           </button>
@@ -77,7 +77,7 @@ function App() {
         </div>
 
         {/* Editors Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1rem', flex: 1, minHeight: '500px' }}>
+        <div className="grid-cols">
           <Editor 
             label="Input JSON" 
             value={input} 
@@ -93,7 +93,7 @@ function App() {
 
       </main>
       
-      <footer style={{ textAlign: 'center', padding: '1rem', opacity: 0.6, fontSize: '0.8rem' }}>
+      <footer className="p-md text-sm opacity-50" style={{ textAlign: 'center' }}>
         <p>Progressive Web App • Built with React & Vite</p>
       </footer>
     </div>
