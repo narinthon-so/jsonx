@@ -101,8 +101,8 @@ function App() {
           <button onClick={handleFormat} className="primary-btn">
             <Play size={18} /> Format
           </button>
-          <button onClick={handleMinify} className="secondary-btn">
-            <Minimize2 size={18} /> Minify
+          <button onClick={handleMinify} className="secondary-btn" title="Convert to Single Line (Minify)">
+            <Minimize2 size={18} /> One Line
           </button>
           <div style={{ flex: 1 }}></div>
           <button onClick={handleLoadSample} className="icon-btn" title="Load Sample">
