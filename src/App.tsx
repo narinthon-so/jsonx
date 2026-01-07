@@ -7,6 +7,7 @@ import { usePWAInstall } from './hooks/usePWAInstall';
 import { VerificationOverlay } from './components/VerificationOverlay';
 import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload, Coffee } from 'lucide-react';
 import { SEO } from './components/SEO';
+import { ContactSection } from './components/ContactSection';
 
 function App() {
   const [input, setInput] = useState('');
@@ -111,6 +112,7 @@ function App() {
       <div className="glass-header flex-between">
         <Header />
         <div style={{ display: 'flex', gap: '0.5rem' }}>
+
           <a
             href={import.meta.env.VITE_BUY_ME_A_COFFEE_URL || "https://www.buymeacoffee.com"}
             target="_blank"
@@ -186,6 +188,10 @@ function App() {
         </div>
 
       </main>
+      
+      <div className="max-w-4xl mx-auto px-4 w-full">
+        <ContactSection />
+      </div>
       
 
     </div>

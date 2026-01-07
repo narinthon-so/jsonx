@@ -106,7 +106,7 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1rem;
   flex: 1;
-  min-height: 500px;
+  min-height: calc(100vh - 200px);
 }
 
 /* Base resets */
@@ -274,3 +274,54 @@ textarea {
   background-color: rgba(255, 221, 0, 0.2);
   border-color: #FFDD00;
 }
+
+/* Contact Section Styles */
+.contact-section-container {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  position: relative;
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #60a5fa, #c084fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.contact-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .contact-actions {
+    flex-direction: row;
+  }
+}
+
+.copy-feedback {
+  color: #4ade80; /* green-400 */
+}
+
+/* Light / Dark Mode Handling for Contact */
+:root[data-theme="light"] .text-subtle {
+  color: #4b5563; /* gray-600 */
+}
+:root[data-theme="dark"] .text-subtle {
+  color: #9ca3af; /* gray-400 */
+}
+
+.w-full { width: 100%; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.text-center { text-align: center; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+
