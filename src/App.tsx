@@ -6,6 +6,7 @@ import { formatJson, minifyJson, loadSample } from './utils/json';
 import { usePWAInstall } from './hooks/usePWAInstall';
 import { VerificationOverlay } from './components/VerificationOverlay';
 import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload, Coffee } from 'lucide-react';
+import { SEO } from './components/SEO';
 
 function App() {
   const [input, setInput] = useState('');
@@ -106,6 +107,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <SEO />
       <div className="glass-header flex-between">
         <Header />
         <div style={{ display: 'flex', gap: '0.5rem' }}>
