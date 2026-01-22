@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Editor } from './components/Editor';
 import { OutputViewer } from './components/OutputViewer';
-import { formatJson, minifyJson, loadSample } from './utils/json';
+import { formatJson, minifyJson, loadSample, jsonToString, stringToJson } from './utils/json';
 import { usePWAInstall } from './hooks/usePWAInstall';
 import { VerificationOverlay } from './components/VerificationOverlay';
-import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload, Coffee } from 'lucide-react';
+import { Play, Minimize2, Trash2, FileJson, Sun, Moon, Download, Upload, Coffee, Quote, Braces } from 'lucide-react';
 import { SEO } from './components/SEO';
 import { ContactSection } from './components/ContactSection';
 
@@ -46,6 +46,28 @@ function App() {
     try {
       const minified = minifyJson(input);
       setOutput(minified);
+      setError(null);
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  };
+
+  const handleToString = () => {
+    if (!input.trim()) return;
+    try {
+      const stringified = jsonToString(input);
+      setOutput(stringified);
+      setError(null);
+    } catch (e) {
+      setError((e as Error).message);
+    }
+  };
+
+  const handleFromString = () => {
+    if (!input.trim()) return;
+    try {
+      const json = stringToJson(input);
+      setOutput(json);
       setError(null);
     } catch (e) {
       setError((e as Error).message);
@@ -158,6 +180,12 @@ function App() {
           </button>
           <button onClick={handleMinify} className="secondary-btn" title="Convert to Single Line (Minify)">
             <Minimize2 size={18} /> One Line
+          </button>
+          <button onClick={handleToString} className="secondary-btn" title="Convert JSON to escaped string">
+            <Quote size={18} /> To String
+          </button>
+          <button onClick={handleFromString} className="secondary-btn" title="Convert escaped string to JSON">
+            <Braces size={18} /> From String
           </button>
           <div style={{ flex: 1 }}></div>
           <button onClick={triggerFileUpload} className="icon-btn" title="Upload JSON File">
