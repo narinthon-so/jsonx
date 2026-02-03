@@ -31,6 +31,11 @@ jobs:
         run: npm ci --legacy-peer-deps
 
       - name: Build
+        env:
+          VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
+          VITE_BUY_ME_A_COFFEE_URL: ${{ vars.VITE_BUY_ME_A_COFFEE_URL }}
+          VITE_APP_URL: ${{ vars.VITE_APP_URL }}
+          VITE_CONTACT_EMAIL: ${{ vars.VITE_CONTACT_EMAIL }}
         run: npm run build
 
       - name: Upload artifact
