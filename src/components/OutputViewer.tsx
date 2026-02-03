@@ -3,6 +3,8 @@ import ReactJson from '@microlink/react-json-view';
 import { clsx } from 'clsx';
 import { saveAs } from 'file-saver';
 import { Check, Copy, Code, Network, Download } from 'lucide-react';
+import SimpleEditor from 'react-simple-code-editor';
+import { highlight } from '../utils/highlight';
 
 interface OutputViewerProps {
   value: string;
@@ -38,19 +40,19 @@ export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
 
   return (
     <div className={clsx("glass", "editor-container")} style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
-      
+
       {/* Header */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0.75rem 1rem', borderBottom: 'var(--glass-border)' }}>
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
           <span style={{ fontWeight: 500, fontSize: '0.9rem' }}>Output</span>
-          
+
           <div style={{ background: 'rgba(0,0,0,0.05)', borderRadius: '6px', padding: '2px', display: 'flex' }}>
-            <button 
+            <button
               onClick={() => setViewMode('text')}
               className={clsx("icon-btn")}
-              style={{ 
-                padding: '4px 8px', 
-                fontSize: '0.75rem', 
+              style={{
+                padding: '4px 8px',
+                fontSize: '0.75rem',
                 background: viewMode === 'text' ? 'var(--btn-active-bg)' : 'transparent',
                 boxShadow: viewMode === 'text' ? 'var(--btn-active-shadow)' : 'none',
                 height: 'auto',
@@ -61,13 +63,13 @@ export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
             >
               <Code size={14} /> Text
             </button>
-            <button 
+            <button
               onClick={() => isValid && setViewMode('tree')}
               className={clsx("icon-btn")}
               disabled={!isValid}
-              style={{ 
-                padding: '4px 8px', 
-                fontSize: '0.75rem', 
+              style={{
+                padding: '4px 8px',
+                fontSize: '0.75rem',
                 background: viewMode === 'tree' ? 'var(--btn-active-bg)' : 'transparent',
                 boxShadow: viewMode === 'tree' ? 'var(--btn-active-shadow)' : 'none',
                 height: 'auto',
@@ -88,7 +90,7 @@ export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
             <Download size={16} />
           </button>
           <button onClick={handleCopy} className="icon-btn" title="Copy Output" style={{ opacity: value ? 1 : 0.5 }}>
-             {copied ? <Check size={16} color="var(--success-color)" /> : <Copy size={16} />}
+            {copied ? <Check size={16} color="var(--success-color)" /> : <Copy size={16} />}
           </button>
         </div>
       </div>
@@ -96,33 +98,31 @@ export function OutputViewer({ value, placeholder, theme }: OutputViewerProps) {
       {/* Content */}
       <div style={{ position: 'relative', flex: 1, overflow: 'auto' }}>
         {viewMode === 'text' || !isValid ? (
-          <textarea
+          <SimpleEditor
             value={value}
-            readOnly
-            placeholder={placeholder}
-            spellCheck={false}
-            className="p-md text-sm"
-            style={{ 
-              height: '100%', 
-              width: '100%', 
-              fontFamily: 'var(--font-mono)',
-              border: 'none',
-              background: 'transparent',
-              resize: 'none',
-              outline: 'none',
-              color: 'var(--text-color)'
+            onValueChange={() => { }}
+            highlight={code => highlight(code)}
+            padding={16}
+            readOnly={true}
+            style={{
+              fontFamily: '"Fira Code", monospace',
+              fontSize: 14,
+              backgroundColor: 'transparent',
+              minHeight: '100%'
             }}
+            textareaClassName="focus:outline-none"
+            placeholder={placeholder}
           />
         ) : (
           <div style={{ padding: '1rem', height: '100%' }}>
-            <ReactJson 
-              src={jsonObject} 
-              theme={theme === 'dark' ? 'ocean' : 'rjv-default'} 
+            <ReactJson
+              src={jsonObject}
+              theme={theme === 'dark' ? 'ocean' : 'rjv-default'}
               style={{ background: 'transparent', fontFamily: 'monospace' }}
               name={null}
               displayDataTypes={false}
               iconStyle="triangle"
-              enableClipboard={false} 
+              enableClipboard={false}
             />
           </div>
         )}

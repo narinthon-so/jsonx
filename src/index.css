@@ -325,3 +325,74 @@ textarea {
 .mb-2 { margin-bottom: 0.5rem; }
 .mb-6 { margin-bottom: 1.5rem; }
 
+
+/* PrismJS Syntax Highlighting Custom Theme */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: var(--text-color);
+  text-shadow: none;
+  font-family: "Fira Code", monospace;
+  font-size: 14px;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+  tab-size: 2;
+  hyphens: none;
+}
+
+/* JSON Tokens */
+.token.property {
+  color: #d19a66; /* Light Orange/Brown for keys in Dark Mode */
+}
+
+.token.string {
+  color: #98c379; /* Green for values */
+}
+
+.token.number {
+  color: #d19a66; /* Orange */
+}
+
+.token.boolean {
+  color: #56b6c2; /* Cyan */
+}
+
+.token.null {
+  color: #e06c75; /* Red */
+}
+
+.token.punctuation {
+  color: #abb2bf; /* Grey */
+}
+
+.token.operator {
+  color: #abb2bf;
+}
+
+/* Light Mode Overrides */
+[data-theme='light'] .token.property {
+  color: #a84e0b; /* Darker Orange */
+}
+
+[data-theme='light'] .token.string {
+  color: #2b7a31; /* Darker Green */
+}
+
+[data-theme='light'] .token.number {
+  color: #a84e0b;
+}
+
+[data-theme='light'] .token.boolean {
+  color: #0550ae; /* Blue */
+}
+
+[data-theme='light'] .token.null {
+  color: #cf222e; /* Red */
+}
+
+[data-theme='light'] .token.punctuation {
+  color: #57606a;
+}

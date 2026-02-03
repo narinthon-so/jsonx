@@ -14,6 +14,10 @@ interface EditorProps {
 export function Editor({ value, onChange, readOnly, label, error, placeholder }: EditorProps) {
   const [copied, setCopied] = useState(false);
 
+  // Dynamic import or require might be needed if strictly node, but this is a vite app.
+  // We'll trust the plan and imports.
+  // Note: We need to import the SimpleCodeEditor
+
   const handleCopy = async () => {
     await navigator.clipboard.writeText(value);
     setCopied(true);
@@ -31,7 +35,7 @@ export function Editor({ value, onChange, readOnly, label, error, placeholder }:
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           {value && (
             <>
-               <button onClick={handleCopy} className="icon-btn" title="Copy">
+              <button onClick={handleCopy} className="icon-btn" title="Copy">
                 {copied ? <Check size={16} color="var(--success-color)" /> : <Clipboard size={16} />}
               </button>
               {!readOnly && (
@@ -43,21 +47,21 @@ export function Editor({ value, onChange, readOnly, label, error, placeholder }:
           )}
         </div>
       </div>
-      
-      <div style={{ position: 'relative', flex: 1 }}>
-        <textarea
+
+      <div style={{ position: 'relative', flex: 1, overflow: 'auto' }}>
+        <SimpleEditor
           value={value}
-          onChange={(e) => onChange?.(e.target.value)}
-          readOnly={readOnly}
-          placeholder={placeholder}
-          spellCheck={false}
-          className="p-md text-sm"
-          style={{ 
-            height: '100%', 
-            width: '100%', 
-            fontFamily: 'var(--font-mono)',
-            backgroundColor: error ? 'var(--error-bg)' : 'transparent'
+          onValueChange={code => onChange?.(code)}
+          highlight={code => highlight(code)}
+          padding={16}
+          style={{
+            fontFamily: '"Fira Code", monospace',
+            fontSize: 14,
+            backgroundColor: error ? 'var(--error-bg)' : 'transparent',
+            minHeight: '100%'
           }}
+          textareaClassName="focus:outline-none"
+          placeholder={placeholder}
         />
       </div>
 
@@ -69,3 +73,6 @@ export function Editor({ value, onChange, readOnly, label, error, placeholder }:
     </div>
   );
 }
+
+import SimpleEditor from 'react-simple-code-editor';
+import { highlight } from '../utils/highlight';
